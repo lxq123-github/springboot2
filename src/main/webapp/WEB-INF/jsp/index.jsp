@@ -21,5 +21,9 @@
         }
     </style>
 <body>
-hello
+<div>
+    <iframe id="iframeTop" name="iframeTop" frameborder="3" border="1" src="index/top"></iframe>
+    <iframe id="iframeLeft" name="iframeLeft" frameborder="3" border="1"  src="index/left"></iframe>
+    <iframe id="iframeContent" name="iframeContent" frameborder="3" border="1"  src=""></iframe>
+</div>
 </body>
