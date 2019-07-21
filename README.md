@@ -3,6 +3,9 @@
 1. 导入resources/sql下面的两个表order.sql，urlmgr.sql
 2. 运行Springboot2Application.java文件
 3. 在页面输入 http://localhost:8080/index
+4. Swagger功能追加
+   http://localhost:8080/swagger-ui.html#/
+
 
 ---
 # mysql8安装步骤：  

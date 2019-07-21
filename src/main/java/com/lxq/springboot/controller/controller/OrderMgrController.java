@@ -4,6 +4,9 @@ import com.github.pagehelper.PageInfo;
 import com.lxq.springboot.controller.common.InitController;
 import com.lxq.springboot.form.OrderPojo;
 import com.lxq.springboot.service.OrderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(value="/order")
+@Api(value = "订单管理控制器")
 public class OrderMgrController extends InitController {
     @Autowired
     private OrderService orderService;
@@ -25,6 +29,8 @@ public class OrderMgrController extends InitController {
      * @param pages
      * @return
      */
+    @ApiOperation(value="显示订单信息", notes="根据页码显示订单信息")
+    @ApiImplicitParam(name = "pages", value = "当前页码", required = true, dataType = "Integer", paramType = "path")
     @RequestMapping(method= RequestMethod.GET)
     public ModelAndView show(Integer pages) throws Exception{
         pages = pages==null?1:pages;
@@ -39,6 +45,8 @@ public class OrderMgrController extends InitController {
      * @param pages
      * @return
      */
+    @ApiOperation(value="跳转订单信息", notes="根据页码跳转订单信息")
+    @ApiImplicitParam(name = "pages", value = "当前页码", required = true, dataType = "Integer", paramType = "path")
     @RequestMapping(value = "/go/{pages}",method= RequestMethod.GET)
     public ModelAndView go(@PathVariable Integer pages) throws Exception{
         pages = pages<1?1:pages;
@@ -51,6 +59,8 @@ public class OrderMgrController extends InitController {
      * @param oid
      * @return
      */
+    @ApiOperation(value="删除订单ID信息", notes="根据页码删除订单信息")
+    @ApiImplicitParam(name = "pages", value = "当前页码", required = true, dataType = "Integer", paramType = "path")
     @RequestMapping(value="/delete/{oid}",method= RequestMethod.GET)
     public ModelAndView delete(@PathVariable Integer oid) throws Exception{
         int rsid = orderService.deleteOrder(oid);
@@ -64,6 +74,8 @@ public class OrderMgrController extends InitController {
      * @param oid
      * @return
      */
+    @ApiOperation(value="更新订单ID信息", notes="根据页码更新订单信息")
+    @ApiImplicitParam(name = "oid", value = "当前订单id", required = true, dataType = "Integer", paramType = "path")
     @RequestMapping(value="/update/{oid}",method = RequestMethod.GET)
     public ModelAndView update(@PathVariable Integer oid) throws Exception{
         OrderPojo order = orderService.findById(oid);
@@ -76,6 +88,7 @@ public class OrderMgrController extends InitController {
      * 跳转添加订单
      * @return
      */
+    @ApiOperation(value="跳转add页面", notes="跳转add页面")
     @RequestMapping(value="/add",method = RequestMethod.GET)
     public String add() throws Exception{
         return "order/add";
@@ -86,6 +99,8 @@ public class OrderMgrController extends InitController {
      * @param order
      * @return
      */
+    @ApiOperation(value="更新订单信息", notes="更新订单信息")
+    @ApiImplicitParam(name = "order", value = "订单对象", required = true, dataType = "OrderPojo", paramType = "path")
     @RequestMapping(value="/updateDate",method = RequestMethod.POST)
     public String save(OrderPojo order) throws Exception{
         if(order.getOrderId()!=null)
@@ -100,6 +115,8 @@ public class OrderMgrController extends InitController {
      * @param ids
      * @return
      */
+    @ApiOperation(value="删除订单", notes="删除订单")
+    @ApiImplicitParam(name = "ids", value = "String[]", required = true, dataType = "String[]", paramType = "path")
     @RequestMapping(value="/batchDelete",method = RequestMethod.POST)
     public String batchDelete(String[] ids) throws Exception{
         orderService.deleteBatch(ids);
