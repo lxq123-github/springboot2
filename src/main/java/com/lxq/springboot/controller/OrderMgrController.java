@@ -1,42 +1,24 @@
 package com.lxq.springboot.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.lxq.springboot.pojo.OrderPojo;
+import com.lxq.springboot.controller.common.InitController;
+import com.lxq.springboot.form.OrderPojo;
 import com.lxq.springboot.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 订单管理控制器
  */
 @Controller
 @RequestMapping(value="/order")
-public class OrderMgr {
+public class OrderMgrController extends InitController {
     @Autowired
     private OrderService orderService;
-
-    /**
-     * 初始化日期类型
-     * @param request
-     * @param binder
-     */
-    @InitBinder
-    protected void init(HttpServletRequest request, ServletRequestDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-    }
 
     /**
      * 显示订单信息
@@ -44,7 +26,7 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(method= RequestMethod.GET)
-    public ModelAndView show(Integer pages){
+    public ModelAndView show(Integer pages) throws Exception{
         pages = pages==null?1:pages;
         PageInfo pageInfo= orderService.findAll(pages,5);
         ModelAndView mv = new ModelAndView("order/show");
@@ -58,7 +40,7 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(value = "/go/{pages}",method= RequestMethod.GET)
-    public ModelAndView go(@PathVariable Integer pages){
+    public ModelAndView go(@PathVariable Integer pages) throws Exception{
         pages = pages<1?1:pages;
         ModelAndView mv = new ModelAndView("redirect:/order?pages="+pages);
         return mv;
@@ -70,8 +52,9 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(value="/delete/{oid}",method= RequestMethod.GET)
-    public ModelAndView delete(@PathVariable Integer oid){
-        orderService.deleteOrder(oid);
+    public ModelAndView delete(@PathVariable Integer oid) throws Exception{
+        int rsid = orderService.deleteOrder(oid);
+        System.out.println(rsid);
         ModelAndView mv = new ModelAndView("redirect:/order");
         return mv;
     }
@@ -82,7 +65,7 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(value="/update/{oid}",method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable Integer oid){
+    public ModelAndView update(@PathVariable Integer oid) throws Exception{
         OrderPojo order = orderService.findById(oid);
         ModelAndView mv = new ModelAndView("order/update");
         mv.addObject("order",order);
@@ -94,7 +77,7 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(value="/add",method = RequestMethod.GET)
-    public String add(){
+    public String add() throws Exception{
         return "order/add";
     }
 
@@ -104,7 +87,7 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(value="/updateDate",method = RequestMethod.POST)
-    public String save(OrderPojo order){
+    public String save(OrderPojo order) throws Exception{
         if(order.getOrderId()!=null)
             orderService.updateOrder(order);
         else
@@ -118,7 +101,7 @@ public class OrderMgr {
      * @return
      */
     @RequestMapping(value="/batchDelete",method = RequestMethod.POST)
-    public String batchDelete(String[] ids){
+    public String batchDelete(String[] ids) throws Exception{
         orderService.deleteBatch(ids);
         return "redirect:/order";
     }

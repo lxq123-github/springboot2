@@ -2,7 +2,7 @@ package com.lxq.springboot;
 
 import com.github.pagehelper.PageHelper;
 import com.lxq.springboot.dao.OrderMapper;
-import com.lxq.springboot.pojo.OrderPojo;
+import com.lxq.springboot.form.OrderPojo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

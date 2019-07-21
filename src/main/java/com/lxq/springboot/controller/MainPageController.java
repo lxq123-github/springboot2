@@ -1,15 +1,16 @@
 package com.lxq.springboot.controller;
 
-import com.lxq.springboot.pojo.UrlPojo;
-import com.lxq.springboot.service.UrlService;
+import com.lxq.springboot.controller.common.InitController;
+import com.lxq.springboot.form.UrlPojo;
+import com.lxq.springboot.service.impl.UrlServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /***
@@ -18,9 +19,9 @@ import java.util.List;
 @Controller
 @RequestMapping(value="/index")
 @Api(value = "主页加载页面")
-public class MainPage {
-    @Resource
-    private UrlService urlService;
+public class MainPageController extends InitController {
+    @Autowired
+    private UrlServiceImpl urlService;
 
     /**
      * 主页面显示
@@ -28,7 +29,7 @@ public class MainPage {
      */
     @ApiOperation(value="主页面显示", notes="")
     @RequestMapping(method = RequestMethod.GET)
-    public String index(){
+    public String index() throws Exception{
         return "index";
     }
 
@@ -38,7 +39,7 @@ public class MainPage {
      */
     @ApiOperation(value="页面头显示", notes="")
     @RequestMapping(value="/top",method = RequestMethod.GET)
-    public String top(){
+    public String top() throws Exception{
         return "view/top";
     }
 
@@ -48,7 +49,7 @@ public class MainPage {
      */
     @ApiOperation(value="左页面显示", notes="")
     @RequestMapping(value="/left",method = RequestMethod.GET)
-    public ModelAndView left(){
+    public ModelAndView left() throws Exception{
         List<UrlPojo> urls = urlService.findAllUrl();
         ModelAndView mv = new ModelAndView("view/left");
         mv.addObject("urls",urls);

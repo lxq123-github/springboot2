@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxq.springboot.dao.OrderMapper">
+    <sql id="Base_Column_List">
+        orderId, clientId, orderDate, quantity, commont
+    </sql>
+    <resultMap id="BaseResultMap" type="com.lxq.springboot.entity.Order">
+        <result column="orderId"  property="orderId" />
+        <result column="clientId"  property="clientId" />
+        <result column="orderDate" property="orderDate" />
+        <result column="quantity" property="quantity" />
+        <result column="commont" property="commont" />
+    </resultMap>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from spring.`order`
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="com.lxq.springboot.form.OrderPojo">
+        select
+        <include refid="Base_Column_List" />
+        from spring.`order`
+        where orderid = #{id}
+    </select>
+
+    <select id="findOrderCount" resultType="Integer">
+        select count(*) from spring.`order`
+    </select>
+
+    <delete id="deleteOrder" parameterType="Integer">
+        delete from spring.`order`
+        where orderid = #{id}
+    </delete>
+
+    <update id="updateOrder" parameterType="com.lxq.springboot.form.OrderPojo" >
+        update spring.`order` set
+        clientId=#{clientId},
+        orderDate=#{orderDate},
+        quantity=#{quantity},
+        commont=#{commont}
+        where orderId = #{orderId}
+    </update>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.lxq.springboot.form.OrderPojo">
+        insert into spring.`order` (clientId,orderDate,quantity,commont) values (#{clientId},#{orderDate},#{quantity},#{commont})
+    </insert>
+    <delete id="deleteBatch" parameterType="Integer">
+        delete from spring.`order`
+        where orderId in
+        <foreach collection='array' item='id' open='(' separator=',' close=')'>#{id}</foreach>
+    </delete>
+</mapper>

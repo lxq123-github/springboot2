@@ -1,4 +1,4 @@
-package com.lxq.springboot.pojo;
+package com.lxq.springboot.form;
 
 import lombok.Data;
 

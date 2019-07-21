@@ -1,8 +1,7 @@
 package com.lxq.springboot.dao;
 
-import com.lxq.springboot.pojo.UrlPojo;
+import com.lxq.springboot.form.UrlPojo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -11,6 +10,5 @@ import java.util.List;
  */
 @Mapper
 public interface UrlMapper {
-    @Select("select * from spring.`urlmgr`")
     List<UrlPojo> findAllUrl();
 }

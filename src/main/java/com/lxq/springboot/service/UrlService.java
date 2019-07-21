@@ -1,7 +1,7 @@
 package com.lxq.springboot.service;
 
 
-import com.lxq.springboot.pojo.UrlPojo;
+import com.lxq.springboot.form.UrlPojo;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  * URL服务层
  */
 public interface UrlService {
-    List<UrlPojo> findAllUrl();
+    List<UrlPojo> findAllUrl() throws Exception;
 }
