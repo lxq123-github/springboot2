@@ -5,11 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.lxq.springboot.dao.OrderMapper;
 import com.lxq.springboot.form.OrderPojo;
 import com.lxq.springboot.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
-    @Resource
+    @Autowired
     private OrderMapper orderMapper;
 
     @Override

@@ -1,4 +1,4 @@
-package com.lxq.springboot.controller;
+package com.lxq.springboot.controller.controller;
 
 import com.lxq.springboot.controller.common.InitController;
 import com.lxq.springboot.form.UrlPojo;
