@@ -1,0 +1,55 @@
+1. devtools: https://blog.csdn.net/jaydenwang5310/article/details/78738847
+Spring Boot应用支持热部署，提高开发者的开发效率，无需手动重启Spring Boot应用
+devtools的原理:深层原理是使用了两个ClassLoader，一个Classloader加载那些不会改变的类（第三方Jar包），
+另一个ClassLoader加载会更改的类，称为restart ClassLoader,这样在有代码更改的时候，原来的restart ClassLoader 被丢弃，
+重新创建一个restart ClassLoader，由于需要加载的类相比较少，所以实现了较快的重启时间。
+
+2.Actuator 是 SpringBoot 项目中一个非常强大一个功能，有助于对应用程序进行监视和管理，通过 restful api 请求来监管、审计、收集应用的运行情况。
+https://www.cnblogs.com/jmcui/p/9820579.html
+
+3.lombok的注解介绍 https://www.cnblogs.com/zhangyinhua/p/8623018.html  https://www.jianshu.com/p/30619ae25773
+@NonNull : 让你不在担忧并且爱上NullPointerException
+@CleanUp : 自动资源管理：不用再在finally中添加资源的close方法
+@Setter/@Getter : 自动生成set和get方法
+@ToString : 自动生成toString方法
+@EqualsAndHashcode : 从对象的字段中生成hashCode和equals的实现
+@NoArgsConstructor/@RequiredArgsConstructor/@AllArgsConstructor自动生成构造方法
+@Data : 自动生成set/get方法，toString方法，equals方法，hashCode方法，不带参数的构造方法
+@Value : 用于注解final类
+@Builder : 产生复杂的构建器api类
+@SneakyThrows : 异常处理（谨慎使用）
+@Synchronized : 同步方法安全的转化
+@Getter(lazy=true) :
+@Log : 支持各种logger对象，使用时用对应的注解，如：@Log4j
+***推荐使用技巧**
+在 Bean / Entity 类上使用 @Data 注解。
+需要使用 Log 对象的地方使用 @Log4j（依项目日志框架决定）。
+注意：lombok 的注解不能被继承。
+@Data   ：注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、hashCode、toString 方法
+@Setter：注解在属性上，为属性提供 setting 方法
+@Getter：注解在属性上，为属性提供 getting 方法
+@Log4j ：注解在类上，为类提供一个 属性名为log 的 log4j 日志对象
+@NoArgsConstructor：注解在类上，为类提供一个无参的构造方法
+@AllArgsConstructor：注解在类上，为类提供一个全参的构造方法
+
+4.mysql
+启动：输入 net start mysql
+停止：输入 net stop mysql
+
+5.log
+org.apache.log4j.ConsoleAppender（控制台）
+org.apache.log4j.FileAppender（文件）
+org.apache.log4j.jdbc.JDBCAppender（数据库）
+org.apache.log4j.net.SMTPAppender（邮件）
+org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）
+org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）
+org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）
+
+OFF：关闭了日志信息
+FATAL：可能导致应用中止的严重事件错误
+ERROR：严重错误 主要是程序的错误
+WARN：一般警告，比如session丢失
+INFO：一般要显示的信息，比如登录登出
+DEBUG：程序的调试信息
+TRACE：比DEBUG更细粒度的事件信息
+ALL：打开所有级别的日志
