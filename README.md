@@ -1,7 +1,7 @@
 # springboot练习小项目
 ## 执行步骤：
 1. 导入resources/sql下面的两个表order.sql，urlmgr.sql
-2. 运行SprdemoApplication.java文件
+2. 运行Springboot2Application.java文件
 3. 在页面输入 http://localhost:8080/index
 
 ---
