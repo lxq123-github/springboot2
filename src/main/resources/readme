@@ -53,3 +53,6 @@ INFO：一般要显示的信息，比如登录登出
 DEBUG：程序的调试信息
 TRACE：比DEBUG更细粒度的事件信息
 ALL：打开所有级别的日志
+
+sonar使用——sonarlint
+https://blog.csdn.net/qq_35981283/article/details/81080402
