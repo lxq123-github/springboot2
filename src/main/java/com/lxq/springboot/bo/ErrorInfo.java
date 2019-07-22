@@ -1,4 +1,4 @@
-package com.lxq.springboot.controller;
+package com.lxq.springboot.bo;
 
 import lombok.Data;
 

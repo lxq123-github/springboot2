@@ -1,7 +1,7 @@
 package com.lxq.springboot.service.impl;
 
-import com.lxq.springboot.dao.UrlMapper;
-import com.lxq.springboot.form.UrlPojo;
+import com.lxq.springboot.mapper.UrlMapper;
+import com.lxq.springboot.form.UrlForm;
 import com.lxq.springboot.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class UrlServiceImpl implements UrlService {
     private UrlMapper urlMapper;
     @Override
     @Transactional(propagation= Propagation.NOT_SUPPORTED, readOnly = true)
-    public List<UrlPojo> findAllUrl() throws Exception{
+    public List<UrlForm> findAllUrl() throws Exception{
         return urlMapper.findAllUrl();
     }
 }

@@ -1,17 +1,17 @@
-package com.lxq.springboot.controller.controller;
+package com.lxq.springboot.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.lxq.springboot.controller.common.InitController;
-import com.lxq.springboot.form.OrderPojo;
+import com.lxq.springboot.form.OrderForm;
 import com.lxq.springboot.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -20,7 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value="/order")
 @Api(value = "订单管理控制器")
-public class OrderMgrController extends InitController {
+public class OrderMgrController {
+    public static final String REDIRECT_ORDER = "redirect:/order";
     @Autowired
     private OrderService orderService;
 
@@ -31,7 +32,7 @@ public class OrderMgrController extends InitController {
      */
     @ApiOperation(value="显示订单信息", notes="根据页码显示订单信息")
     @ApiImplicitParam(name = "pages", value = "当前页码", required = true, dataType = "Integer", paramType = "path")
-    @RequestMapping(method= RequestMethod.GET)
+    @GetMapping
     public ModelAndView show(Integer pages) throws Exception{
         pages = pages==null?1:pages;
         PageInfo pageInfo= orderService.findAll(pages,5);
@@ -47,11 +48,10 @@ public class OrderMgrController extends InitController {
      */
     @ApiOperation(value="跳转订单信息", notes="根据页码跳转订单信息")
     @ApiImplicitParam(name = "pages", value = "当前页码", required = true, dataType = "Integer", paramType = "path")
-    @RequestMapping(value = "/go/{pages}",method= RequestMethod.GET)
-    public ModelAndView go(@PathVariable Integer pages) throws Exception{
+    @GetMapping(value = "/go/{pages}")
+    public ModelAndView go(@PathVariable Integer pages) {
         pages = pages<1?1:pages;
-        ModelAndView mv = new ModelAndView("redirect:/order?pages="+pages);
-        return mv;
+        return new ModelAndView(REDIRECT_ORDER + "?pages="+pages);
     }
 
     /**
@@ -61,12 +61,10 @@ public class OrderMgrController extends InitController {
      */
     @ApiOperation(value="删除订单ID信息", notes="根据页码删除订单信息")
     @ApiImplicitParam(name = "pages", value = "当前页码", required = true, dataType = "Integer", paramType = "path")
-    @RequestMapping(value="/delete/{oid}",method= RequestMethod.GET)
+    @GetMapping(value="/delete/{oid}")
     public ModelAndView delete(@PathVariable Integer oid) throws Exception{
-        int rsid = orderService.deleteOrder(oid);
-        System.out.println(rsid);
-        ModelAndView mv = new ModelAndView("redirect:/order");
-        return mv;
+        orderService.deleteOrder(oid);
+        return new ModelAndView(REDIRECT_ORDER);
     }
 
     /**
@@ -76,9 +74,9 @@ public class OrderMgrController extends InitController {
      */
     @ApiOperation(value="更新订单ID信息", notes="根据页码更新订单信息")
     @ApiImplicitParam(name = "oid", value = "当前订单id", required = true, dataType = "Integer", paramType = "path")
-    @RequestMapping(value="/update/{oid}",method = RequestMethod.GET)
+    @GetMapping(value="/update/{oid}")
     public ModelAndView update(@PathVariable Integer oid) throws Exception{
-        OrderPojo order = orderService.findById(oid);
+        OrderForm order = orderService.findById(oid);
         ModelAndView mv = new ModelAndView("order/update");
         mv.addObject("order",order);
         return mv;
@@ -89,7 +87,7 @@ public class OrderMgrController extends InitController {
      * @return
      */
     @ApiOperation(value="跳转add页面", notes="跳转add页面")
-    @RequestMapping(value="/add",method = RequestMethod.GET)
+    @GetMapping(value="/add")
     public String add() throws Exception{
         return "order/add";
     }
@@ -101,13 +99,13 @@ public class OrderMgrController extends InitController {
      */
     @ApiOperation(value="更新订单信息", notes="更新订单信息")
     @ApiImplicitParam(name = "order", value = "订单对象", required = true, dataType = "OrderPojo", paramType = "path")
-    @RequestMapping(value="/updateDate",method = RequestMethod.POST)
-    public String save(OrderPojo order) throws Exception{
+    @PostMapping(value="/updateDate")
+    public String save(OrderForm order) throws Exception{
         if(order.getOrderId()!=null)
             orderService.updateOrder(order);
         else
             orderService.saveOrder(order);
-        return "redirect:/order";
+        return REDIRECT_ORDER;
     }
 
     /**
@@ -117,9 +115,9 @@ public class OrderMgrController extends InitController {
      */
     @ApiOperation(value="删除订单", notes="删除订单")
     @ApiImplicitParam(name = "ids", value = "String[]", required = true, dataType = "String[]", paramType = "path")
-    @RequestMapping(value="/batchDelete",method = RequestMethod.POST)
+    @PostMapping(value="/batchDelete")
     public String batchDelete(String[] ids) throws Exception{
         orderService.deleteBatch(ids);
-        return "redirect:/order";
+        return REDIRECT_ORDER;
     }
 }

@@ -6,13 +6,13 @@ import lombok.Data;
  * URL实体类
  */
 @Data
-public class UrlPojo {
+public class UrlForm {
     //ID
     private Integer id;
     // URL Name
     private String name;
     // URL
-    private String url;
+    private String urlName;
     // 说明
     private String comment;
 }

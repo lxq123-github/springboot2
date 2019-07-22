@@ -1,6 +1,6 @@
-package com.lxq.springboot.dao;
+package com.lxq.springboot.mapper;
 
-import com.lxq.springboot.form.OrderPojo;
+import com.lxq.springboot.form.OrderForm;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -11,17 +11,17 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    List<OrderPojo> findAll();
+    List<OrderForm> findAll();
 
-    OrderPojo findById(int id);
+    OrderForm findById(int id);
 
     int findOrderCount();
 
     int deleteOrder(int id);
 
-    int updateOrder(OrderPojo order);
+    int updateOrder(OrderForm order);
 
-    int insert(OrderPojo order);
+    int insert(OrderForm order);
 
     void deleteBatch(String[] ids);
 }

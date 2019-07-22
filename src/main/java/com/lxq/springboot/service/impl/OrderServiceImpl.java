@@ -2,8 +2,8 @@ package com.lxq.springboot.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lxq.springboot.dao.OrderMapper;
-import com.lxq.springboot.form.OrderPojo;
+import com.lxq.springboot.mapper.OrderMapper;
+import com.lxq.springboot.form.OrderForm;
 import com.lxq.springboot.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,14 +25,13 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(propagation= Propagation.NOT_SUPPORTED, readOnly = true)
     public PageInfo findAll(int page, int pageSize) throws Exception {
         PageHelper.startPage(page,pageSize);
-        List<OrderPojo> orders = orderMapper.findAll();
-        PageInfo pageInfo = new PageInfo(orders);
-        return pageInfo;
+        List<OrderForm> orders = orderMapper.findAll();
+        return new PageInfo(orders);
     }
 
     @Override
     @Transactional(propagation= Propagation.NOT_SUPPORTED, readOnly = true)
-    public OrderPojo findById(int id) throws Exception {
+    public OrderForm findById(int id) throws Exception {
         return orderMapper.findById(id);
     }
 
@@ -48,12 +47,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int updateOrder(OrderPojo order) throws Exception {
+    public int updateOrder(OrderForm order) throws Exception {
         return orderMapper.updateOrder(order);
     }
 
     @Override
-    public int saveOrder(OrderPojo order)  throws Exception{
+    public int saveOrder(OrderForm order)  throws Exception{
         return orderMapper.insert(order);
     }
 

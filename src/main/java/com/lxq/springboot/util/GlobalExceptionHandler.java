@@ -1,7 +1,6 @@
-package com.lxq.springboot.controller;
+package com.lxq.springboot.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.lxq.springboot.bo.ErrorInfo;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 //增强型控制器，对于控制器的全局配置放在同一个位置，全局异常的注解，放在类上
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     private static final String DEFAULT_ERROR_VIEW = "error";
 
     @ExceptionHandler(Exception.class) // 指明需要处理的异常类型以及子类。注解放在方法上面

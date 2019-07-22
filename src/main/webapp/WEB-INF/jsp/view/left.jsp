@@ -25,11 +25,11 @@
 <ul>
     <c:forEach items="${urls}" var="item" varStatus="status">
         <c:choose>
-            <c:when  test="${item.url==null}">
+            <c:when  test="${item.urlName==null}">
                 <li><a href="javascript:void(0)" target="iframeContent">${item.name}</a></li>
             </c:when>
             <c:otherwise>
-                <li><a href="${item.url}" target="iframeContent">${item.name}</a></li>
+                <li><a href="${item.urlName}" target="iframeContent">${item.name}</a></li>
             </c:otherwise>
         </c:choose>
     </c:forEach>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lxq.springboot.dao.OrderMapper">
+<mapper namespace="com.lxq.springboot.mapper.OrderMapper">
     <sql id="Base_Column_List">
         orderId, clientId, orderDate, quantity, commont
     </sql>
@@ -17,7 +17,7 @@
         from spring.`order`
     </select>
 
-    <select id="findById" parameterType="Integer" resultType="com.lxq.springboot.form.OrderPojo">
+    <select id="findById" parameterType="Integer" resultType="com.lxq.springboot.form.OrderForm">
         select
         <include refid="Base_Column_List" />
         from spring.`order`
@@ -33,7 +33,7 @@
         where orderid = #{id}
     </delete>
 
-    <update id="updateOrder" parameterType="com.lxq.springboot.form.OrderPojo" >
+    <update id="updateOrder" parameterType="com.lxq.springboot.form.OrderForm" >
         update spring.`order` set
         clientId=#{clientId},
         orderDate=#{orderDate},
@@ -41,7 +41,7 @@
         commont=#{commont}
         where orderId = #{orderId}
     </update>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.lxq.springboot.form.OrderPojo">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.lxq.springboot.form.OrderForm">
         insert into spring.`order` (clientId,orderDate,quantity,commont) values (#{clientId},#{orderDate},#{quantity},#{commont})
     </insert>
     <delete id="deleteBatch" parameterType="Integer">

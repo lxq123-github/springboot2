@@ -9,7 +9,7 @@ import java.util.Date;
  * 订单
  */
 @Data
-public class OrderPojo implements Serializable {
+public class OrderForm implements Serializable {
     //订单ID
     private Integer orderId;
     //客户ID

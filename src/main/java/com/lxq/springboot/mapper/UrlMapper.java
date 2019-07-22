@@ -1,6 +1,6 @@
-package com.lxq.springboot.dao;
+package com.lxq.springboot.mapper;
 
-import com.lxq.springboot.form.UrlPojo;
+import com.lxq.springboot.form.UrlForm;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,5 +10,5 @@ import java.util.List;
  */
 @Mapper
 public interface UrlMapper {
-    List<UrlPojo> findAllUrl();
+    List<UrlForm> findAllUrl();
 }

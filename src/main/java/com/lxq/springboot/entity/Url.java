@@ -12,7 +12,7 @@ public class Url {
     // URL Name
     private String name;
     // URL
-    private String url;
+    private String urlName;
     // 说明
     private String comment;
 }

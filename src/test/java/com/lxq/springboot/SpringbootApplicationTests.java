@@ -1,8 +1,8 @@
 package com.lxq.springboot;
 
 import com.github.pagehelper.PageHelper;
-import com.lxq.springboot.dao.OrderMapper;
-import com.lxq.springboot.form.OrderPojo;
+import com.lxq.springboot.mapper.OrderMapper;
+import com.lxq.springboot.form.OrderForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,14 +18,14 @@ public class SpringbootApplicationTests {
     private OrderMapper orderMapper;
     @Test
     public void findAll() {
-        List<OrderPojo> orders = orderMapper.findAll();
-        for(OrderPojo order:orders){
+        List<OrderForm> orders = orderMapper.findAll();
+        for(OrderForm order:orders){
             System.out.println(order);
         }
     }
     @Test
     public void findById() {
-        OrderPojo order = orderMapper.findById(3);
+        OrderForm order = orderMapper.findById(3);
         System.out.println(order);
     }
 
@@ -37,8 +37,8 @@ public class SpringbootApplicationTests {
     @Test
     public void testPagehelper(){
         PageHelper.startPage(2,2);
-        List<OrderPojo> orders = orderMapper.findAll();
-        for(OrderPojo order : orders){
+        List<OrderForm> orders = orderMapper.findAll();
+        for(OrderForm order : orders){
             System.out.println(order);
         }
     }

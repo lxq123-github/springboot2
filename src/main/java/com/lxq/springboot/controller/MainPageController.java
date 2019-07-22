@@ -1,14 +1,13 @@
-package com.lxq.springboot.controller.controller;
+package com.lxq.springboot.controller;
 
-import com.lxq.springboot.controller.common.InitController;
-import com.lxq.springboot.form.UrlPojo;
+import com.lxq.springboot.form.UrlForm;
 import com.lxq.springboot.service.impl.UrlServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value="/index")
 @Api(value = "主页加载页面")
-public class MainPageController extends InitController {
+public class MainPageController {
     @Autowired
     private UrlServiceImpl urlService;
 
@@ -28,7 +27,7 @@ public class MainPageController extends InitController {
      * @return index.jsp
      */
     @ApiOperation(value="主页面显示", notes="")
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String index() throws Exception{
         return "index";
     }
@@ -38,7 +37,7 @@ public class MainPageController extends InitController {
      * @return view/top.jsp
      */
     @ApiOperation(value="页面头显示", notes="")
-    @RequestMapping(value="/top",method = RequestMethod.GET)
+    @GetMapping(value = "/top")
     public String top() throws Exception{
         return "view/top";
     }
@@ -48,9 +47,9 @@ public class MainPageController extends InitController {
      * @return view/left.jsp
      */
     @ApiOperation(value="左页面显示", notes="")
-    @RequestMapping(value="/left",method = RequestMethod.GET)
+    @GetMapping(value = "/left")
     public ModelAndView left() throws Exception{
-        List<UrlPojo> urls = urlService.findAllUrl();
+        List<UrlForm> urls = urlService.findAllUrl();
         ModelAndView mv = new ModelAndView("view/left");
         mv.addObject("urls",urls);
         return mv;
