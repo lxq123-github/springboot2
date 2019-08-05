@@ -7,12 +7,13 @@ import lombok.Data;
  */
 @Data
 public class UrlForm {
-    //ID
-    private Integer id;
-    // URL Name
-    private String name;
-    // URL
-    private String urlName;
-    // 说明
-    private String comment;
+
+  //ID
+  private Integer id;
+  // URL Name
+  private String name;
+  // URL
+  private String urlName;
+  // 说明
+  private String comment;
 }

@@ -14,24 +14,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Swagger2 {
 
-    @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.lxq.springboot"))
-                .paths(PathSelectors.any())
-                .build();
-    }
+  @Bean
+  public Docket createRestApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.lxq.springboot"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Spring Boot练习")
-                .description("对于增删改查的练习")
-                .termsOfServiceUrl("http://localhost:8080")
-                .contact("lxq")
-                .version("1.0")
-                .build();
-    }
+  private ApiInfo apiInfo() {
+    return new ApiInfoBuilder()
+        .title("Spring Boot练习")
+        .description("对于增删改查的练习")
+        .termsOfServiceUrl("http://localhost:8080")
+        .contact("lxq")
+        .version("1.0")
+        .build();
+  }
 
 }

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Title</title>
+    <title>Title</title>
     <style type="text/css">
         * {
             margin: 0;
@@ -17,41 +17,47 @@
             width: 700px;
             border: 1px solid black;
         }
-        .div1{
+
+        .div1 {
             width: 800px;
             height: 300px;
             background: lightgreen;
-            position:absolute;
-            left:0;
+            position: absolute;
+            left: 0;
             top: 0;
             bottom: 0;
             right: 0;
             margin: auto;
         }
-        .div1 .div2{
+
+        .div1 .div2 {
             margin-top: 30px;
             margin-left: 60px;
             height: 30px;
             width: 100%;
         }
-        .div1 .div3{
+
+        .div1 .div3 {
             margin-left: 60px;
             height: 30px;
             width: 100%;
             position: absolute;
             bottom: 0px;
         }
-        h1{
+
+        h1 {
             margin-top: 30px;
-            text-align:center;
+            text-align: center;
         }
-        h2{
+
+        h2 {
             margin-top: 20px;
             color: red;
-            text-align:center;
+            text-align: center;
         }
-        .btn{
-            width:65px;
+
+        .btn {
+            width: 65px;
         }
     </style>
 </head>
@@ -62,97 +68,114 @@
 </c:if>
 <div class="div1">
     <div class="div2">
-        <input type="button" class="btn" value="添加" onclick="addBtn()"/>&nbsp;&nbsp;<input class="btn" type="button" value="全部删除" onclick="deleteAll()"/>
+        <input type="button" class="btn" value="添加" onclick="addBtn()"/>&nbsp;&nbsp;<input
+            class="btn" type="button" value="全部删除" onclick="deleteAll()"/>
     </div>
-<table cellspacing="0" cellpadding="0" class="tbl" border="1px solid black">
-    <thead align="middle">
-        <td><input type="checkbox" value="" id="selectAll" onclick="selectAll()" style="width:20px;height:18px;"/></td>
+    <table cellspacing="0" cellpadding="0" class="tbl" border="1px solid black">
+        <thead align="middle">
+        <td><input type="checkbox" value="" id="selectAll" onclick="selectAll()"
+                   style="width:20px;height:18px;"/></td>
         <td>编号</td>
         <td>客户ID</td>
         <td>订单日期</td>
         <td>重量</td>
         <td width="260">说明</td>
         <td>操作</td>
-    </thead>
-<tbody>
-<form id="chkFrm" method="post" action="order/batchDelete" onsubmit="return checkBoxForm();">
-    <c:forEach items="${orders.list}" var="item" varStatus="status">
-        <tr align="middle">
-            <td><input type="checkbox" value="${item.orderId}" name="ids" style="width:20px;height:18px;"/></td>
-            <td>${item.orderId}</td>
-            <td>${item.clientId}</td>
-            <td><frm:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd"/> </td>
-            <td>${item.quantity}</td>
-            <td>${item.commont}</td>
-            <td><input class="btn" id="delete" type="button" value="删除" onclick="deleteBtn('${item.orderId}')"/> <input class="btn" id="update" type="button" value="更新" onclick="updateBtn('${item.orderId}')"/> </td>
-        </tr>
-    </c:forEach>
-</form>
-</tbody>
-</table>
+        </thead>
+        <tbody>
+        <form id="chkFrm" method="post" action="order/batchDelete"
+              onsubmit="return checkBoxForm();">
+            <c:forEach items="${orders.list}" var="item" varStatus="status">
+                <tr align="middle">
+                    <td><input type="checkbox" value="${item.orderId}" name="ids"
+                               style="width:20px;height:18px;"/></td>
+                    <td>${item.orderId}</td>
+                    <td>${item.clientId}</td>
+                    <td><frm:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd"/></td>
+                    <td>${item.quantity}</td>
+                    <td>${item.commont}</td>
+                    <td><input class="btn" id="delete" type="button" value="删除"
+                               onclick="deleteBtn('${item.orderId}')"/> <input class="btn"
+                                                                               id="update"
+                                                                               type="button"
+                                                                               value="更新"
+                                                                               onclick="updateBtn('${item.orderId}')"/>
+                    </td>
+                </tr>
+            </c:forEach>
+        </form>
+        </tbody>
+    </table>
     <div class="div3">
-        <form id = "f2" name="f2" method="get" onSubmit="return checknum()">
+        <form id="f2" name="f2" method="get" onSubmit="return checknum()">
             <table border="0" align="center" width="500px">
                 <tr>
                     <td>第${orders.pageNum}页 共${orders.pages}页 <a href="order?pages=1">首页</a></td>
-                    <td><a href="order?pages=${orders.pageNum<=1?orders.pageNum:orders.pageNum-1}">上一页</a></td>
-                    <td><a href="order?pages=${orders.pageNum>=orders.pages?orders.pages:orders.pageNum+1}">下一页</a></td>
+                    <td><a href="order?pages=${orders.pageNum<=1?orders.pageNum:orders.pageNum-1}">上一页</a>
+                    </td>
+                    <td>
+                        <a href="order?pages=${orders.pageNum>=orders.pages?orders.pages:orders.pageNum+1}">下一页</a>
+                    </td>
                     <td><a href="order?pages=${orders.pages}">最后一页</a></td>
-                    <td>转到第:<input id="goPage" type="text" name="goPage" size="5">页<input type="submit" id="go" value="GO" name="go" onclick="go1()"></td>
+                    <td>转到第:<input id="goPage" type="text" name="goPage" size="5">页<input
+                            type="submit" id="go" value="GO" name="go" onclick="go1()"></td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
 </body>
-<script >
-    function checknum(){
-        var pages = document.getElementById("pages").value;
-        if(pages > '${orders.pages}' || pages <1){
-            return false;
-        }
+<script>
+  function checknum() {
+    var pages = document.getElementById("pages").value;
+    if (pages > '${orders.pages}' || pages < 1) {
+      return false;
     }
-    function go1(){
-        var goPage = document.getElementById("goPage");
-        var go = document.getElementById("go");
-        var f2 = document.getElementById("f2");
-        f2.action="/order/go/"+goPage.value;
-        f2.submit();
+  }
+
+  function go1() {
+    var goPage = document.getElementById("goPage");
+    var go = document.getElementById("go");
+    var f2 = document.getElementById("f2");
+    f2.action = "/order/go/" + goPage.value;
+    f2.submit();
+  }
+
+  function deleteBtn(id) {
+    window.location.href = "order/delete/" + id;
+  }
+
+  function updateBtn(id) {
+    window.open("order/update/" + id, "newwindow",
+        "height=500, width=800, top=200, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
+  }
+
+  function addBtn() {
+    window.open("order/add", "newwindow",
+        "height=500, width=800, top=200, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
+  }
+
+  function selectAll() {
+    var selectAll = document.getElementById("selectAll");
+    var ids = document.getElementsByName("ids");
+    for (var i = 0; i < ids.length; i++) {
+      ids[i].checked = selectAll.checked;
+    }
+  }
+
+  function deleteAll() {
+    var flag = false;
+    var delIds = document.getElementsByName("ids");
+    for (var i = 0; i < delIds.length; i++) {
+      if (delIds[i].checked) {
+        flag = true;
+      }
     }
 
-    function deleteBtn(id){
-        window.location.href="order/delete/"+id;
+    if (!flag) {
+      return false;
     }
-
-    function updateBtn(id){
-        window.open("order/update/"+id, "newwindow", "height=500, width=800, top=200, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
-    }
-
-    function addBtn(){
-        window.open("order/add", "newwindow", "height=500, width=800, top=200, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
-    }
-
-    function selectAll(){
-        var selectAll = document.getElementById("selectAll");
-        var ids = document.getElementsByName("ids");
-        for (var i = 0; i < ids.length; i++) {
-           ids[i].checked=selectAll.checked;
-        }
-    }
-
-    function  deleteAll() {
-        var flag = false;
-        var delIds = document.getElementsByName("ids");
-        for (var i = 0; i < delIds.length; i++) {
-            if (delIds[i].checked) {
-                flag=true;
-            }
-        }
-
-        if(!flag){
-            return false;
-        }
-            document.getElementById("chkFrm").submit();
-    }
+    document.getElementById("chkFrm").submit();
+  }
 </script>
 </html>

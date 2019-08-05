@@ -7,16 +7,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        *{
-            font-size:18px;
+        * {
+            font-size: 18px;
             margin: 0;
-            padding:0;
+            padding: 0;
             background-color: beige;
         }
-        ul{
+
+        ul {
             list-style: none;
             margin-left: 25px;
-            margin-top:30px;
+            margin-top: 30px;
         }
     </style>
 
@@ -25,7 +26,7 @@
 <ul>
     <c:forEach items="${urls}" var="item" varStatus="status">
         <c:choose>
-            <c:when  test="${item.urlName==null}">
+            <c:when test="${item.urlName==null}">
                 <li><a href="javascript:void(0)" target="iframeContent">${item.name}</a></li>
             </c:when>
             <c:otherwise>
@@ -35,11 +36,11 @@
     </c:forEach>
 </ul>
 <script type="text/javascript">
-    if('${urls}' == '[]' || '${urls}'.length==2){
-        var oUl = document.getElementsByTagName("ul")[0];
-        var str = "<li><a href='/order' target='iframeContent'>订单管理</a></li>";
-        oUl.innerHTML = str;
-    }
+  if ('${urls}' == '[]' || '${urls}'.length == 2) {
+    var oUl = document.getElementsByTagName("ul")[0];
+    var str = "<li><a href='/order' target='iframeContent'>订单管理</a></li>";
+    oUl.innerHTML = str;
+  }
 </script>
 </body>
 </html>

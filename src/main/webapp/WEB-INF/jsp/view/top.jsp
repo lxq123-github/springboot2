@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        *{
-            margin:0;
-            padding:0;
+        * {
+            margin: 0;
+            padding: 0;
             background-color: beige;
         }
-        span{
+
+        span {
             font-size: 30px;
             color: blueviolet;
             text-align: center;
-            display:block;
+            display: block;
         }
     </style>
 </head>
 <body>
-        <span>XXX后台管理系统</span>
+<span>XXX后台管理系统</span>
 </body>
 </html>

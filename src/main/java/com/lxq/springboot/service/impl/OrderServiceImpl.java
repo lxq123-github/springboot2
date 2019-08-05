@@ -18,46 +18,47 @@ import java.util.List;
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
-    @Autowired
-    private OrderMapper orderMapper;
 
-    @Override
-    @Transactional(propagation= Propagation.NOT_SUPPORTED, readOnly = true)
-    public PageInfo findAll(int page, int pageSize) throws Exception {
-        PageHelper.startPage(page,pageSize);
-        List<OrderForm> orders = orderMapper.findAll();
-        return new PageInfo(orders);
-    }
+  @Autowired
+  private OrderMapper orderMapper;
 
-    @Override
-    @Transactional(propagation= Propagation.NOT_SUPPORTED, readOnly = true)
-    public OrderForm findById(int id) throws Exception {
-        return orderMapper.findById(id);
-    }
+  @Override
+  @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+  public PageInfo findAll(int page, int pageSize) throws Exception {
+    PageHelper.startPage(page, pageSize);
+    List<OrderForm> orders = orderMapper.findAll();
+    return new PageInfo(orders);
+  }
 
-    @Override
-    @Transactional(propagation= Propagation.NOT_SUPPORTED, readOnly = true)
-    public int findOrderCount() throws Exception {
-        return orderMapper.findOrderCount();
-    }
+  @Override
+  @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+  public OrderForm findById(int id) throws Exception {
+    return orderMapper.findById(id);
+  }
 
-    @Override
-    public int deleteOrder(int id) throws Exception {
-        return orderMapper.deleteOrder(id);
-    }
+  @Override
+  @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+  public int findOrderCount() throws Exception {
+    return orderMapper.findOrderCount();
+  }
 
-    @Override
-    public int updateOrder(OrderForm order) throws Exception {
-        return orderMapper.updateOrder(order);
-    }
+  @Override
+  public int deleteOrder(int id) throws Exception {
+    return orderMapper.deleteOrder(id);
+  }
 
-    @Override
-    public int saveOrder(OrderForm order)  throws Exception{
-        return orderMapper.insert(order);
-    }
+  @Override
+  public int updateOrder(OrderForm order) throws Exception {
+    return orderMapper.updateOrder(order);
+  }
 
-    @Override
-    public void deleteBatch(String[] ids)  throws Exception{
-        orderMapper.deleteBatch(ids);
-    }
+  @Override
+  public int saveOrder(OrderForm order) throws Exception {
+    return orderMapper.insert(order);
+  }
+
+  @Override
+  public void deleteBatch(String[] ids) throws Exception {
+    orderMapper.deleteBatch(ids);
+  }
 }

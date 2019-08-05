@@ -13,20 +13,22 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class Springboot2Application {
 
-	@Autowired
-	private RequestMappingHandlerAdapter handlerAdapter;
+  @Autowired
+  private RequestMappingHandlerAdapter handlerAdapter;
 
-	@PostConstruct
-	public void addConversionConfig() {
-		ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer)handlerAdapter.getWebBindingInitializer();
-		if (initializer.getConversionService() != null) {
-			GenericConversionService genericConversionService = (GenericConversionService)initializer.getConversionService();
-			genericConversionService.addConverter(new StringToDateConverter());
-		}
-	}
+  @PostConstruct
+  public void addConversionConfig() {
+    ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer) handlerAdapter
+        .getWebBindingInitializer();
+    if (initializer.getConversionService() != null) {
+      GenericConversionService genericConversionService = (GenericConversionService) initializer
+          .getConversionService();
+      genericConversionService.addConverter(new StringToDateConverter());
+    }
+  }
 
-	public static void main(String[] args) {
-		SpringApplication.run(Springboot2Application.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(Springboot2Application.class, args);
+  }
 
 }
